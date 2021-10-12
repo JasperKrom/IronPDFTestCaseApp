@@ -5,7 +5,7 @@ namespace IronPDFTestCaseApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static async void Main(string[] args)
         {
             Installation.DefaultRenderingEngine = IronPdf.Rendering.PdfRenderingEngine.Chrome;
 
@@ -16,7 +16,7 @@ namespace IronPDFTestCaseApp
             var ForegroundStamp = new IronPdf.Editing.HtmlStamp() { Html = "<h2 style='color:red'>Just some text", 
                 Width = 50, Height = 50, Opacity = 50, 
                 ZIndex = IronPdf.Editing.HtmlStamp.StampLayer.OnTopOfExistingPDFContent };
-            pdf.StampHTMLAsync(ForegroundStamp);
+            await pdf.StampHTMLAsync(ForegroundStamp);
 
             Console.WriteLine("Please insert location to save Pdf file:");
             var saveLocation = Console.ReadLine();
