@@ -7,6 +7,8 @@ namespace IronPDFTestCaseApp
     {
         static void Main(string[] args)
         {
+            Installation.DefaultRenderingEngine = IronPdf.Rendering.PdfRenderingEngine.Chrome;
+
             Console.WriteLine("Please insert file location of Pdf File:");
             var fileLocation = Console.ReadLine();
             var pdf = new PdfDocument(fileLocation);
