@@ -14,31 +14,39 @@ namespace IronPDFTestCaseApp
             Console.WriteLine("Please insert file location of Pdf File:");
             var fileLocation = Console.ReadLine();
             //var pdf = new PdfDocument(fileLocation);
-            using (var stream = new FileStream(fileLocation, FileMode.Open))
+            try
             {
-
-                using (var memStream = new MemoryStream())
+                using (var stream = new FileStream(fileLocation, FileMode.Open))
                 {
-                    stream.CopyTo(memStream);
-                    var pdf = new PdfDocument(stream);
 
-                    var ForegroundStamp = new IronPdf.Editing.HtmlStamp()
+                    using (var memStream = new MemoryStream())
                     {
-                        Html = "<h2 style='color:red'>Just some text",
-                        Width = 50,
-                        Height = 50,
-                        Opacity = 50,
-                        ZIndex = IronPdf.Editing.HtmlStamp.StampLayer.OnTopOfExistingPDFContent
-                    };
-                    await pdf.StampHTMLAsync(ForegroundStamp);
+                        stream.CopyTo(memStream);
+                        var pdf = new PdfDocument(stream);
 
-                    Console.WriteLine("Please insert location to save Pdf file:");
-                    var saveLocation = Console.ReadLine();
-                    pdf.SaveAs(saveLocation);
+                        var ForegroundStamp = new IronPdf.Editing.HtmlStamp()
+                        {
+                            Html = "<h2 style='color:red'>Just some text",
+                            Width = 50,
+                            Height = 50,
+                            Opacity = 50,
+                            ZIndex = IronPdf.Editing.HtmlStamp.StampLayer.OnTopOfExistingPDFContent
+                        };
+                        await pdf.StampHTMLAsync(ForegroundStamp);
 
-                    Console.WriteLine("File saved");
-                    Console.ReadLine();
+                        Console.WriteLine("Please insert location to save Pdf file:");
+                        var saveLocation = Console.ReadLine();
+                        pdf.SaveAs(saveLocation);
+
+                        Console.WriteLine("File saved");
+                        Console.ReadLine();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.GetType());
             }
         }
     }
