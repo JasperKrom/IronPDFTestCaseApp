@@ -1,11 +1,12 @@
 ﻿using IronPdf;
 using System;
+using System.Threading.Tasks;
 
 namespace IronPDFTestCaseApp
 {
     class Program
     {
-        static async void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Installation.DefaultRenderingEngine = IronPdf.Rendering.PdfRenderingEngine.Chrome;
 
